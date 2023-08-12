@@ -1,2 +1,2 @@
 # Crown-Clothing-graphql
-E-commerce App | React powered by GraphQL
+E-commerce App | React with GraphQL
