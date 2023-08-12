@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+
 import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
@@ -11,20 +13,26 @@ import { CartProvider } from "./contexts/cart.context";
 import reportWebVitals from "./reportWebVitals";
 import "./index.scss";
 
+const client = new ApolloClient({
+  uri: "https://crwn-clothing.com/",
+  cache: new InMemoryCache(),
+});
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <UserProvider>
-        <CategoriesProvider>
-          <CartProvider>
-            <App />
-          </CartProvider>
-        </CategoriesProvider>
-      </UserProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
-  rootElement
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <UserProvider>
+          <CategoriesProvider>
+            <CartProvider>
+              <App />
+            </CartProvider>
+          </CategoriesProvider>
+        </UserProvider>
+      </BrowserRouter>
+    </ApolloProvider>
+  </React.StrictMode>
 );
 
 reportWebVitals();
